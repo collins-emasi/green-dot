@@ -3,7 +3,7 @@ This is a repo for the Green Dot IoT Node. This board is designed for IoT applic
 
 For the hardware design. Please see the [design project here](https://flux.ai/collinsemasi)
 
-![Green Dot Board](archive\greendot.png)
+![Green Dot Board](archive/greendot.png)
 
 ## Things you need
 - Custom Green Dot Board
