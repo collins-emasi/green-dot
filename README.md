@@ -1,7 +1,7 @@
 # Green Dot Board
 This is a repo for the Green Dot IoT Node. This board is designed for IoT applications using LoRaWAN for wireless communication.
 
-For the hardware design. Please see the [design project here](https://flux.ai/collinsemasi)
+For the hardware design. Please see the [design project here](https://www.flux.ai/collinsemasi/the-green-dot-2040e5-board)
 
 ![Green Dot Board](archive/greendot.png)
 
