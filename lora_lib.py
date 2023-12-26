@@ -1,6 +1,7 @@
 import time
 from machine import UART
 
+from credentials import *
 from led import blink_rgb_led, BLUE, RED, CYAN, PURPLE
 
 # Set your UART parameters (baudrate, etc.)
@@ -86,11 +87,6 @@ def join_network(timeout=10000):
         return False
 
 def configure_lora_module():
-    # Configure the LoRa module with OTAA parameters
-    # dev_eui = "2CF7F12051000F42"
-    # app_eui = "BE0100000000011B"                    # JoinEUI
-    # app_key = "848DD7932D6C084C7DFE14485C9CB53C"
-
     # set_work_mode("LWOTAA")
     # # set_addr_mode("0")
 
