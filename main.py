@@ -1,5 +1,4 @@
 import time
-import dht
 import machine
 from machine import Pin, I2C, deepsleep
 

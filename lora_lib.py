@@ -65,14 +65,14 @@ def soft_reset():
     response = send_at_command(b'AT+RESET')
     print(response)
 
-def send_cmsg(data):
+def send_cmsg(data, timeout=5000):
     command = b'AT+CMSG=' + data
     response = send_at_command(command)
     if "FPENDING" in response:
         print("Downlink Received!")
     print(response)
 
-def send_msghex(hex_data):
+def send_msghex(hex_data, timeout=5000):
     command = b'AT+MSGHEX=' + hex_data
     response = send_at_command(command)
     if "ERROR" not in response:
@@ -103,9 +103,9 @@ def configure_lora_module():
     set_work_mode("LWOTAA")
 
     # Set OTAA parameters
-    set_id("AppEui", JoinEui.encode())
-    set_key("APPKEY", APPKEY.encode())
-    set_id("DevEui", DevEui.encode())
+    # set_id("AppEui", JoinEui.encode())
+    # set_key("APPKEY", APPKEY.encode())
+    # set_id("DevEui", DevEui.encode())
 
     # Join the network using OTAA
     status = join_network()
