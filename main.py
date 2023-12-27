@@ -1,16 +1,21 @@
 import time
 import dht
 import machine
-from machine import deepsleep
+from machine import Pin, I2C, deepsleep
 
+import SHT31
 from lora_lib import configure_lora_module, send_msghex
 
 # Define firmware parameters
 UPLINK_INTERVAL = 60000         # In milliseconds
 FIRST_TIME = True
 
+# PB7 -> Green  (SDA)
+# PB6 -> Yellow (SCL)
+
 # Configure DHT22 Sensor
-temp_sensor = dht.DHT22(machine.Pin(6))
+i2c = I2C(id=1, scl=Pin(7), sda=Pin(6), freq =400000)
+sensor = SHT31.SHT31(i2c, addr=0x44)
 
 # Loop after joined network
 while True:
@@ -20,16 +25,17 @@ while True:
         FIRST_TIME = False
 
     # Read sensor data
-    humidity = temp_sensor.humidity()
-    temperature = temp_sensor.temperature()
+    temp_humi = sensor.get_temp_humi()
+    humidity = temp_humi[1]
+    temperature = temp_humi[0]
 
     # Convert into hex for transmission
-    sensor_data_hex = f'{int(humidity):04x}{int(temperature):04x}'
+    sensor_data_hex = f'{int(humidity * 100):04x}{int(temperature * 100):04x}'
 
     # Transmit data
     send_msghex(sensor_data_hex)
 
-    # Deep sleep for 1 minute (adjust as needed)
-    print("Going into deep sleep...")
-    time.sleep_ms(1000)  # Ensure print statement is displayed
-    deepsleep(UPLINK_INTERVAL)  # Sleep for 1 minute (60000 milliseconds)
+    # Sleep for UPLINK INTERVAL (adjust as needed)
+    print(f"Temperature: {temperature}")
+    print(f"Humidity: {humidity}")
+    time.sleep_ms(UPLINK_INTERVAL) 
